@@ -1,0 +1,15 @@
+:root {
+   --cell-size: 70px;
+   --primary-color: #f5ecb8;
+   --secondary-color: #bbbe64;
+}
+
+.container {
+   width: 100vw;
+   height: 100vh;
+   display: grid;
+   grid-template-columns: repeat(8, auto);
+   justify-content: center;
+   align-content: center;
+   flex-direction: column-reverse;
+}

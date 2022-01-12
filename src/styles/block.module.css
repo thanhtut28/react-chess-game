@@ -1,0 +1,12 @@
+.block {
+   width: var(--cell-size);
+   height: var(--cell-size);
+}
+
+.block.whiteBlock {
+   background-color: var(--primary-color);
+}
+
+.block.blackBlock {
+   background-color: var(--secondary-color);
+}
