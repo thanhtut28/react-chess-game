@@ -8,3 +8,7 @@
    width: 100%;
    height: auto;
 }
+
+.pawn.isSelected {
+   background-color: rgb(151, 175, 175);
+}

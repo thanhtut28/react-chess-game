@@ -3,10 +3,14 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import Board from "./components/board";
 import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import store from "./store/index";
 
 ReactDOM.render(
    <React.StrictMode>
-      <Board />
+      <Provider store={store}>
+         <Board />
+      </Provider>
    </React.StrictMode>,
    document.getElementById("root")
 );

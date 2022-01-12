@@ -1,26 +1,22 @@
-import { BoardProps } from "../board";
-import { initialPositions } from "../../utils/initalPositions";
+import { BoardProps } from "../../utils/types";
+import { Ipiece } from "../../utils/types";
 import Pawn from "./pawn";
-export default function Piece({ block }: { block: BoardProps }) {
-   const { pawn } = initialPositions;
-   const {
-      white: { isWhite: pawnWhite },
-      black: { isWhite: pawnBlack },
-   } = pawn;
+
+interface PieceProps {
+   block: BoardProps;
+   pawns: Ipiece[];
+}
+export default function Piece({ block, pawns }: PieceProps) {
+   console.log(pawns);
+
    return (
-      <div>
-         {pawn.white.positions.map(p => {
-            if (p.row === block.row && p.col === block.col) {
-               return <Pawn isWhite={pawnWhite} position={block} />;
+      <>
+         {pawns.map((pawn, i) => {
+            if (pawn.position.col === block.col && pawn.position.row === block.row) {
+               return <Pawn key={`pawn${i}`} pawn={pawn} />;
             }
-            return <></>;
+            return null;
          })}
-         {pawn.black.positions.map(p => {
-            if (p.row === block.row && p.col === block.col) {
-               return <Pawn isWhite={pawnBlack} position={block} />;
-            }
-            return <></>;
-         })}
-      </div>
+      </>
    );
 }
