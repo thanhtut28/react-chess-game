@@ -1,6 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { BoardProps, Ipiece } from "../utils/types";
 
+interface MoveDispatch {
+   destination: BoardProps;
+   selectedBlock: null | BoardProps;
+}
+
+/**
+ *
+ * @useArrayinColForAllCol
+ */
 const pawn = [
    { row: 2, col: [8], isWhite: true },
    { row: 7, col: [8], isWhite: false },
@@ -15,6 +24,8 @@ for (let i = 0; i < pawn.length; i++) {
          position: { row: pawn[i].row, col: j },
          isWhite: pawn[i].isWhite,
          isSelected: false,
+         type: "pawn",
+         isInitial: true,
       });
    }
 }
@@ -23,23 +34,17 @@ const pawns = createSlice({
    name: "pawns",
    initialState,
    reducers: {
-      selection(state, { payload }: PayloadAction<string>) {
-         for (let i = 0; i < state.length; i++) {
-            const isSelectAgain = state[i].isSelected && state[i].pid === payload;
-            if (!isSelectAgain) {
-               state[i].isSelected = false;
-            }
-         }
-         const index = state.findIndex(p => p.pid === payload);
-         state[index].isSelected = !state[index].isSelected;
-      },
-      move(state, { payload }: PayloadAction<BoardProps>) {
-         const index = state.findIndex(p => p.isSelected === true);
-         state[index].position = payload;
+      move(state, { payload }: PayloadAction<MoveDispatch>) {
+         const index = state.findIndex(
+            pawn =>
+               pawn.position.row === payload.selectedBlock?.row &&
+               pawn.position.col === payload.selectedBlock?.col
+         );
+         state[index].position = payload.destination;
       },
    },
 });
 
-export const { selection, move } = pawns.actions;
+export const { move } = pawns.actions;
 
 export default pawns.reducer;

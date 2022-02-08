@@ -1,26 +1,21 @@
 import { Ipiece } from "../../utils/types";
 import classes from "../../styles/pawn.module.css";
-import { useAppDispatch } from "../../store/index";
-import { selection } from "../../store/pawnsSlice";
 
 type PawnProps = {
    pawn: Ipiece;
+   onClick: (type: string, isWhite: boolean) => void;
 };
 
-export default function Pawn({ pawn }: PawnProps) {
-   const dispatch = useAppDispatch();
-
-   const handleSelect = () => {
-      dispatch(selection(pawn.pid));
+export default function Pawn({ pawn, onClick }: PawnProps) {
+   const handleClick = () => {
+      onClick(pawn.type, pawn.isWhite);
    };
-
-   console.log("isSelected", pawn.isSelected, pawn.pid);
 
    return (
       <>
          <div
             className={`${classes.pawn} ${pawn.isSelected ? classes.isSelected : ""}`}
-            onClick={handleSelect}
+            onClick={handleClick}
          >
             <img
                className={classes.image}

@@ -1,10 +1,12 @@
 import { TypedUseSelectorHook, useSelector, useDispatch } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import pawns from "./pawnsSlice";
+import game from "./boardSlice";
 
 const store = configureStore({
    reducer: {
       pawns,
+      game,
    },
 });
 

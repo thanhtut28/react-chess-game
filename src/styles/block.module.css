@@ -10,3 +10,7 @@
 .block.blackBlock {
    background-color: var(--secondary-color);
 }
+
+.block.isSelected {
+   background-color: rgb(151, 175, 175);
+}
