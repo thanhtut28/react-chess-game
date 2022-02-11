@@ -16,4 +16,5 @@ export interface GameProps {
    selectedBlock: BoardProps | null;
    isWhiteTurn: boolean;
    selectedType: string | null;
+   movablePositions: BoardProps[];
 }

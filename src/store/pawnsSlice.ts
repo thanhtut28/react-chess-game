@@ -41,6 +41,7 @@ const pawns = createSlice({
                pawn.position.col === payload.selectedBlock?.col
          );
          state[index].position = payload.destination;
+         state[index].isInitial = false;
       },
    },
 });

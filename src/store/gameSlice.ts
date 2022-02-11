@@ -7,6 +7,7 @@ interface SelectDispatch {
    type: string;
    isWhite: boolean;
    block: BoardProps;
+   movablePositions: BoardProps[];
 }
 
 const initialState: GameProps = {
@@ -14,6 +15,7 @@ const initialState: GameProps = {
    selectedBlock: null,
    isWhiteTurn: true,
    selectedType: null,
+   movablePositions: [],
 };
 
 const boardSlice = createSlice({
@@ -24,17 +26,20 @@ const boardSlice = createSlice({
          state.isSelection = true;
          state.selectedBlock = payload.block;
          state.selectedType = payload.type;
+         state.movablePositions = payload.movablePositions;
       },
       unSelect(state) {
          state.isSelection = false;
          state.selectedBlock = null;
          state.selectedType = null;
+         state.movablePositions = [];
       },
       changeTurn(state) {
          state.isSelection = false;
          state.selectedBlock = null;
          state.selectedType = null;
          state.isWhiteTurn = !state.isWhiteTurn;
+         state.movablePositions = [];
       },
    },
 });

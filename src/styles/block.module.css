@@ -1,6 +1,7 @@
 .block {
    width: var(--cell-size);
    height: var(--cell-size);
+   border: 1px solid black;
 }
 
 .block.whiteBlock {
@@ -13,4 +14,8 @@
 
 .block.isSelected {
    background-color: rgb(151, 175, 175);
+}
+
+.block.isMovable {
+   background-color: rgb(212, 238, 238);
 }

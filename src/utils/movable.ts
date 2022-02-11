@@ -5,12 +5,12 @@ function movable(
    currentPosition: BoardProps,
    destination: BoardProps,
    type: string,
-   isInitial: boolean,
+   isInitial: boolean | undefined,
    isWhite: boolean,
-   pieces: BoardProps[]
+   pieces: Ipiece[]
 ): boolean {
    if (isEmpty(pieces, destination)) {
-      return pieceMoves(currentPosition, destination, type, isInitial, isWhite);
+      return pieceMoves(currentPosition, destination, type, isInitial, isWhite, pieces);
    }
    return false;
 }
@@ -25,15 +25,13 @@ function eatable(
    return true;
 }
 
-function positionSlice(pieces: Ipiece[]): BoardProps[] {
-   return pieces.map(piece => piece.position);
-}
-
-function combinePositions(...arr: BoardProps[][]): BoardProps[] {
+function combinePositions(...arr: Ipiece[][]): Ipiece[] {
    return arr.flat();
 }
-function isEmpty(pieces: BoardProps[], destination: BoardProps) {
-   return !pieces.some(piece => piece.row === destination.row && piece.col === destination.col);
+function isEmpty(pieces: Ipiece[], destination: BoardProps) {
+   return !pieces.some(
+      piece => piece.position.row === destination.row && piece.position.col === destination.col
+   );
 }
 
-export { movable, eatable, combinePositions, positionSlice, isEmpty };
+export { movable, eatable, combinePositions, isEmpty };

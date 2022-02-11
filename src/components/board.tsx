@@ -2,9 +2,8 @@ import classes from "../styles/board.module.css";
 import { useState, useEffect } from "react";
 import { useAppSelector } from "../store/index";
 import Block from "./block";
-import Piece from "./pieces/piece";
 import { BoardProps } from "../utils/types";
-import { combinePositions, positionSlice } from "../utils/movable";
+import { combinePositions } from "../utils/movable";
 
 export default function Board() {
    const row = 8;
@@ -21,14 +20,23 @@ export default function Board() {
       }
    }, []);
 
-   const pieces = combinePositions(positionSlice(pawns));
+   const pieces = combinePositions(pawns);
+
+   const getPiece = (block: BoardProps) => {
+      return pieces?.find(
+         piece => block.row === piece.position.row && block.col === piece.position.col
+      );
+   };
 
    return (
       <div className={classes.container}>
          {board?.map(block => (
-            <Block block={block} key={`row:${block.row} col:${block.col}`} pieces={pieces}>
-               <Piece key={`piece${block.row} ${block.col}`} block={block} />
-            </Block>
+            <Block
+               block={block}
+               key={`row:${block.row} col:${block.col}`}
+               pieces={pieces}
+               piece={getPiece(block)}
+            />
          ))}
       </div>
    );
